@@ -28,6 +28,12 @@ public class StatServiceImpl implements StatService {
     @Transactional(readOnly = true)
     @Override
     public List<StatDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        return null;
+        if (start.isAfter(end)) {
+            throw new IllegalArgumentException("Start date must be before end time");
+        }
+        if (unique) {
+            return repository.findAllUniqueHitByTimeBetween(start, end, uris);
+        }
+        return repository.findAllByTimeBetween(start, end, uris);
     }
 }

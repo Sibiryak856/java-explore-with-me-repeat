@@ -19,32 +19,33 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleMissingRequestHeaderException(final MissingRequestHeaderException e) {
+    public ApiError handleMissingRequestHeaderException(final MissingRequestHeaderException e) {
         String message = "Requested incorrect header";
         log.info(message);
-        return new ErrorResponse(message);
+        return new ApiError(e, message, "Incorrectly made request.", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleMissingServletRequestParameterException(final MissingServletRequestParameterException e) {
+    public ApiError handleMissingServletRequestParameterException(final MissingServletRequestParameterException e) {
         String message = e.getMessage();
         log.info(message);
-        return new ErrorResponse(message);
+        return new ApiError(e, message, "Incorrectly made request", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleIllegalArgumentException(final IllegalArgumentException e) {
+    public ApiError handleIllegalArgumentException(final IllegalArgumentException e) {
         String message = e.getMessage();
         log.info(message);
-        return new ErrorResponse(message);
+        return new ApiError(e, e.getMessage(),
+                "For the requested operation the conditions are not met.", HttpStatus.BAD_REQUEST);
     }
 
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleMethodArgumentNotValidException(
+    public ApiError handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();
         e.getBindingResult().getAllErrors().forEach((error) -> {
@@ -53,14 +54,15 @@ public class ErrorHandler {
             errors.put(fieldName, errorMessage);
         });
         log.info(errors.toString());
-        return errors;
+        return new ApiError(e, e.getMessage(),
+                "For the requested operation the conditions are not met.", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleThrowable(final Throwable e) {
+    public ApiError handleThrowable(final Exception e) {
         String errorMsg = "Unexpected error occurred";
         log.error(errorMsg, e);
-        return new ErrorResponse(e);
+        return new ApiError(e, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -13,4 +13,6 @@ import ru.practicum.service.StatService;
 public class StatController {
 
     private final StatService service;
+
+
 }
