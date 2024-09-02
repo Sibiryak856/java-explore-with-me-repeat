@@ -8,11 +8,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.StatCreateDto;
 import ru.practicum.StatDto;
-import ru.practicum.model.StatData;
+import ru.practicum.logger.StatLogger;
 import ru.practicum.service.StatService;
 
 import javax.validation.Valid;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,18 +29,19 @@ public class StatController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/hit")
+    @StatLogger
     public void save(@RequestBody @Valid StatCreateDto dto) {
-        StatData saved = service.save(dto);
+        service.save(dto);
     }
 
     @GetMapping("/stats")
+    @StatLogger
     public List<StatDto> getHits(
             @RequestParam("start") @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime start,
             @RequestParam("end") @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
             @RequestParam(required = false) List<String> uris,
             @RequestParam(value = "unique", required = false, defaultValue = "false") Boolean unique) {
-    List<StatDto> statDtoList = service.getStat(start, end, uris, unique);
-    return statDtoList;
+        return service.getStat(start, end, uris, unique);
     }
 
 }
