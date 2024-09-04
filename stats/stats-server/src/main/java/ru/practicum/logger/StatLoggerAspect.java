@@ -24,6 +24,5 @@ public class StatLoggerAspect {
         if (result != null) {
             logger.info("<< {}() - {}", methodName, result);
         }
-        //return result;
     }
 }
