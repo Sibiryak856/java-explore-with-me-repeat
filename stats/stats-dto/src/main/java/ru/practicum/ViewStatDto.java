@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StatDto {
+public class ViewStatDto {
 
     @JsonProperty("app")
     private String app;

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.StatCreateDto;
-import ru.practicum.StatDto;
+import ru.practicum.ViewStatDto;
 import ru.practicum.mapper.StatMapper;
 import ru.practicum.model.StatData;
 import ru.practicum.repository.StatRepository;
@@ -27,7 +27,7 @@ public class StatServiceImpl implements StatService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<StatDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
+    public List<ViewStatDto> getStat(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
         if (start.isAfter(end)) {
             throw new IllegalArgumentException("Start date must be before end time");
         }

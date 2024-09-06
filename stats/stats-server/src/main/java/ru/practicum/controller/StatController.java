@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.StatCreateDto;
-import ru.practicum.StatDto;
+import ru.practicum.ViewStatDto;
 import ru.practicum.logger.StatLogger;
 import ru.practicum.service.StatService;
 
@@ -17,7 +17,9 @@ import java.util.List;
 
 import static ru.practicum.model.StatData.DATE_FORMAT;
 
-// TODO logging in annotation
+/**
+ * TODO logging in annotation
+  */
 
 @RestController
 @Slf4j
@@ -36,7 +38,7 @@ public class StatController {
 
     @GetMapping("/stats")
     @StatLogger
-    public List<StatDto> getHits(
+    public List<ViewStatDto> getHits(
             @RequestParam("start") @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime start,
             @RequestParam("end") @DateTimeFormat(pattern = DATE_FORMAT) LocalDateTime end,
             @RequestParam(required = false) List<String> uris,

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.practicum.StatDto;
+import ru.practicum.ViewStatDto;
 import ru.practicum.model.StatData;
 
 import java.time.LocalDateTime;
@@ -19,9 +19,9 @@ public interface StatRepository extends JpaRepository<StatData, Long> {
             "AND ((:uris) IS NULL OR s.uri IN (:uris)) " +
             "GROUP BY s.appName, s.uri " +
             "ORDER BY hits DESC")
-    List<StatDto> findAllByTimeBetween(@Param("start") LocalDateTime start,
-                                       @Param("end") LocalDateTime end,
-                                       @Param("uris") List<String> uris);
+    List<ViewStatDto> findAllByTimeBetween(@Param("start") LocalDateTime start,
+                                           @Param("end") LocalDateTime end,
+                                           @Param("uris") List<String> uris);
 
     @Query("SELECT new ru.practicum.StatDto(s.appName, s.uri, COUNT(DISTINCT s.ip) AS hits) " +
             "FROM StatData AS s " +
@@ -29,7 +29,7 @@ public interface StatRepository extends JpaRepository<StatData, Long> {
             "AND ((:uris) IS NULL OR s.uri IN (:uris)) " +
             "GROUP BY s.appName, s.uri " +
             "ORDER BY hits DESC")
-    List<StatDto> findAllUniqueHitByTimeBetween(@Param("start") LocalDateTime start,
+    List<ViewStatDto> findAllUniqueHitByTimeBetween(@Param("start") LocalDateTime start,
                                                     @Param("end") LocalDateTime end,
                                                     @Param("uris") List<String> uris);
 }
