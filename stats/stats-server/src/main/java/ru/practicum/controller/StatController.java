@@ -17,7 +17,9 @@ import java.util.List;
 
 import static ru.practicum.model.StatData.DATE_FORMAT;
 
-// TODO logging in annotation
+/**
+ * TODO logging in annotation
+  */
 
 @RestController
 @Slf4j

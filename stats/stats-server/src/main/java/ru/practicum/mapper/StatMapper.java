@@ -9,6 +9,10 @@ import ru.practicum.model.StatData;
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 import static ru.practicum.model.StatData.DATE_FORMAT;
 
+/**
+ * TODO mapperTest (bookmark project)
+ */
+
 @Component
 @Mapper(componentModel = SPRING)
 public interface StatMapper {
