@@ -30,6 +30,6 @@ public interface StatRepository extends JpaRepository<StatData, Long> {
             "GROUP BY s.appName, s.uri " +
             "ORDER BY hits DESC")
     List<StatDto> findAllUniqueHitByTimeBetween(@Param("start") LocalDateTime start,
-                                                    @Param("end") LocalDateTime end,
-                                                    @Param("uris") List<String> uris);
+                                                @Param("end") LocalDateTime end,
+                                                @Param("uris") List<String> uris);
 }
