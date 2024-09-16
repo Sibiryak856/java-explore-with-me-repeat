@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.StatCreateDto;
 import ru.practicum.StatDto;
-import ru.practicum.logger.StatLogger;
+import ru.practicum.aspect.StatLogger;
 import ru.practicum.service.StatService;
 
 import javax.validation.Valid;

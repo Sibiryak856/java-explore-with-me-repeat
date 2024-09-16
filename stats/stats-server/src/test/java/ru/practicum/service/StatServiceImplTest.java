@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 
 /**
  * TODO альтернативные варианты внутри одного теста!!!
- * TODO exception test?
  * TODO check only once invocation in get test
  */
 

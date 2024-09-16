@@ -30,7 +30,7 @@ public class ErrorHandler {
     public ApiError handleMissingServletRequestParameterException(final MissingServletRequestParameterException e) {
         String message = e.getMessage();
         log.info(message);
-        return new ApiError(e, message, "Incorrectly made request", HttpStatus.BAD_REQUEST);
+        return new ApiError(e, message, "Incorrectly made request.", HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
