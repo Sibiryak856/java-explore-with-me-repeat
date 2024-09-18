@@ -5,17 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.practicum</groupId>
-        <artifactId>ewm</artifactId>
+        <artifactId>ewm-main-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ewm-main-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>ewm-client</module>
-        <module>ewm-dto</module>
-        <module>ewm-server</module>
-    </modules>
+    <groupId>ru.yandex.practicum</groupId>
+    <artifactId>ewm-dto</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

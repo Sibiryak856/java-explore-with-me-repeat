@@ -1,4 +1,5 @@
 package ru.practicum.user.controller;
 
-public class UserController {
+public class UserPrivateController {
+
 }
