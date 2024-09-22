@@ -1,33 +1,32 @@
-package ru.practicum.user.dto;
+package user.dto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
+import user.UserShortDto;
 
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @JsonTest
-class UserDtoTest {
+class UserShortDtoTest {
 
     @Autowired
-    private JacksonTester<UserDto> json;
+    private JacksonTester<UserShortDto> json;
 
     @Test
-    void testUserDto() throws IOException {
-        UserDto user = UserDto.builder()
+    void testUserShortDto() throws IOException {
+        UserShortDto user = UserShortDto.builder()
                 .id(1L)
                 .name("Name")
-                .email("name@email.com")
                 .build();
 
-        JsonContent<UserDto> result = json.write(user);
+        JsonContent<UserShortDto> result = json.write(user);
 
         assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(user.getId().intValue());
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo(user.getName());
-        assertThat(result).extractingJsonPathStringValue("$.email").isEqualTo(user.getEmail());
     }
 }
