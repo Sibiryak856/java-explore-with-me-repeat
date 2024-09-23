@@ -9,7 +9,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <groupId>ru.practicum</groupId>
     <artifactId>stats-dto</artifactId>
+
+    <name>Stats Dto</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

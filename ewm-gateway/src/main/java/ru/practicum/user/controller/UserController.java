@@ -3,42 +3,34 @@ package ru.practicum.user.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.practicum.webClient.BaseClient;
+import org.springframework.web.bind.annotation.*;
+import ru.practicum.EwmClientImpl;
+import user.UserCreateDto;
 import user.UserDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
-/**
- * TODO dto to module
- */
-
-@Controller
+@RestController
 @RequestMapping(path = "/admin/users")
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-public class UserAdminController {
+public class UserController {
 
     @Autowired
-    private BaseClient baseClient;
+    private final EwmClientImpl client;
 
-    /*@ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public UserDto save(@RequestBody @Valid UserCreateDto dto) {
-        return  baseClient.getWebClient()
-                .post()
-                .uri("/admin/users")
-                .bodyValue(dto)
-                .retrieve()
-                .toEntity(UserDto.class);
-    }*/
+        UserDto responseEntity = (UserDto) client.createUser(dto).getBody();
+        return (UserDto) client.createUser(dto).getBody();
+    }
 
     public List<UserDto> getAll(
             @RequestParam(required = false) List<Long> ids,
